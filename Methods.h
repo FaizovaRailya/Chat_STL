@@ -6,42 +6,42 @@
 #include <memory>
 
 class Methods {
-	std::vector<User> UserSpisok;				 //список зарегистрированных пользователей
-	std::vector<Message> messageList;			 //создаем вектор, который хранит сообщения в чате
-	std::shared_ptr<User> currentUser = nullptr; //указатель указывает на текущего пользователя
+	std::vector<User> UserSpisok;				 //СЃРїРёСЃРѕРє Р·Р°СЂРµРіРёСЃС‚СЂРёСЂРѕРІР°РЅРЅС‹С… РїРѕР»СЊР·РѕРІР°С‚РµР»РµР№
+	std::vector<Message> messageList;			 //СЃРѕР·РґР°РµРј РІРµРєС‚РѕСЂ, РєРѕС‚РѕСЂС‹Р№ С…СЂР°РЅРёС‚ СЃРѕРѕР±С‰РµРЅРёСЏ РІ С‡Р°С‚Рµ
+	std::shared_ptr<User> currentUser = nullptr;		 //СѓРєР°Р·Р°С‚РµР»СЊ СѓРєР°Р·С‹РІР°РµС‚ РЅР° С‚РµРєСѓС‰РµРіРѕ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ
 
 public:
 	Methods() = default;
 	~Methods() = default;
 
-	int userLogin = 0;									// для индекса текущего логина
+	int userLogin = 0;									// РґР»СЏ РёРЅРґРµРєСЃР° С‚РµРєСѓС‰РµРіРѕ Р»РѕРіРёРЅР°
 	std::shared_ptr<User>getCurrentUser() const;
 	std::shared_ptr<User>getUserByName(const std::string& name) const;
 	std::shared_ptr<User>getUserByLogin(const std::string& login) const;
 
 	void Menu();
-	bool FindName(const std::string& name);							      //проверка имени
-	bool FindLogin(const std::string& login);							  //проверка логина
-	void NewUser();														  //создание нового пользователя
-	bool UserSearch(const std::string& login, const std::string& password);//поиск пользователя по логину и паролю
-	void PrintNamesUsers();												  //получение списка зарегестрированных пользователей
-	int FindUserinUserSpisok(const std::string& name);					  //проверка корректно ли введено имя
-	void setPrivateShowChat() const;									  //чтение личных сообщений
-	void setAllShowChat() const;										  //чтение общих сообщений
-	void setAddMessage();												  //добавление сообщения в массив
+	bool FindName(const std::string& name);							//РїСЂРѕРІРµСЂРєР° РёРјРµРЅРё
+	bool FindLogin(const std::string& login);						//РїСЂРѕРІРµСЂРєР° Р»РѕРіРёРЅР°
+	void NewUser();										//СЃРѕР·РґР°РЅРёРµ РЅРѕРІРѕРіРѕ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ
+	bool UserSearch(const std::string& login, const std::string& password);			//РїРѕРёСЃРє РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ РїРѕ Р»РѕРіРёРЅСѓ Рё РїР°СЂРѕР»СЋ
+	void PrintNamesUsers();									//РїРѕР»СѓС‡РµРЅРёРµ СЃРїРёСЃРєР° Р·Р°СЂРµРіРµСЃС‚СЂРёСЂРѕРІР°РЅРЅС‹С… РїРѕР»СЊР·РѕРІР°С‚РµР»РµР№
+	int FindUserinUserSpisok(const std::string& name);					//РїСЂРѕРІРµСЂРєР° РєРѕСЂСЂРµРєС‚РЅРѕ Р»Рё РІРІРµРґРµРЅРѕ РёРјСЏ
+	void setPrivateShowChat() const;							//С‡С‚РµРЅРёРµ Р»РёС‡РЅС‹С… СЃРѕРѕР±С‰РµРЅРёР№
+	void setAllShowChat() const;								//С‡С‚РµРЅРёРµ РѕР±С‰РёС… СЃРѕРѕР±С‰РµРЅРёР№
+	void setAddMessage();									//РґРѕР±Р°РІР»РµРЅРёРµ СЃРѕРѕР±С‰РµРЅРёСЏ РІ РјР°СЃСЃРёРІ
 	void currrenNull();
 };
 
-class LoginExp : public std::exception {			//исключение если введен логин "all"
+class LoginExp : public std::exception {		 //РёСЃРєР»СЋС‡РµРЅРёРµ РµСЃР»Рё РІРІРµРґРµРЅ Р»РѕРіРёРЅ "all"
 public:
 	const char* what() const noexcept override {
-		return "ERROR: Логин занят!\n\n";
+		return "ERROR: Р›РѕРіРёРЅ Р·Р°РЅСЏС‚!\n\n";
 	}
 };
 
-class NameExp : public std::exception {			//исключение если введено имя "all"
+class NameExp : public std::exception {			//РёСЃРєР»СЋС‡РµРЅРёРµ РµСЃР»Рё РІРІРµРґРµРЅРѕ РёРјСЏ "all"
 public:
 	const char* what()const noexcept override {
-		return "ERROR: Имя пользователя занято!\n\n";
+		return "ERROR: РРјСЏ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ Р·Р°РЅСЏС‚Рѕ!\n\n";
 	}
 };
