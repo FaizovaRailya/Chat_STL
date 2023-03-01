@@ -2,7 +2,7 @@
 #include<string>
 #include "Methods.h"
 
-std::shared_ptr<User> Methods::getUserByLogin(const std::string& login) const {			// указатель на логин пользователя
+std::shared_ptr<User> Methods::getUserByLogin(const std::string& login) const {		// СѓРєР°Р·Р°С‚РµР»СЊ РЅР° Р»РѕРіРёРЅ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ
 	for (auto& user : UserSpisok) {
 		if (login == user.getLogin())
 			return std::make_shared<User>(user);
@@ -10,7 +10,7 @@ std::shared_ptr<User> Methods::getUserByLogin(const std::string& login) const {	
 	return nullptr;
 }
 
-std::shared_ptr<User> Methods::getUserByName(const std::string& name) const {		// указатель на имя пользователя
+std::shared_ptr<User> Methods::getUserByName(const std::string& name) const {		// СѓРєР°Р·Р°С‚РµР»СЊ РЅР° РёРјСЏ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ
 	for (auto& user : UserSpisok) {
 		if (name == user.getName())
 			return std::make_shared<User>(user);
@@ -26,67 +26,67 @@ void Methods::Menu() {
 	bool f = true;
 	while (f) {
 		char a;
-		std::cout << "Количество пользователей: " << UserSpisok.size() << std::endl;
-		std::cout << "------Введите действие:------\n1 - вход\n2 - регистрация\n0 - выход\n";
+		std::cout << "РљРѕР»РёС‡РµСЃС‚РІРѕ РїРѕР»СЊР·РѕРІР°С‚РµР»РµР№: " << UserSpisok.size() << std::endl;
+		std::cout << "------Р’РІРµРґРёС‚Рµ РґРµР№СЃС‚РІРёРµ:------\n1 - РІС…РѕРґ\n2 - СЂРµРіРёСЃС‚СЂР°С†РёСЏ\n0 - РІС‹С…РѕРґ\n";
 		std::cin >> a;
 		std::cin.ignore(100, '\n');
 		std::string log, pas;
 		switch (a) {
-		case '1':													//вход по логину и паролю		
-			std::cout << "----Введите----\nЛогин: ";
+		case '1':									//РІС…РѕРґ РїРѕ Р»РѕРіРёРЅСѓ Рё РїР°СЂРѕР»СЋ		
+			std::cout << "----Р’РІРµРґРёС‚Рµ----\nР›РѕРіРёРЅ: ";
 			std::cin >> log;
-			std::cout << "Пароль: ";
+			std::cout << "РџР°СЂРѕР»СЊ: ";
 			std::cin >> pas;
 			if (UserSearch(log, pas)) {
 				bool f1 = true;
 				while (f1) {
-					std::cout << "\n------Введите действиe:------\n1 - Прочитать сообщениe\n2 - Написать сообщение\n0 - Назад\n";
+					std::cout << "\n------Р’РІРµРґРёС‚Рµ РґРµР№СЃС‚РІРёe:------\n1 - РџСЂРѕС‡РёС‚Р°С‚СЊ СЃРѕРѕР±С‰РµРЅРёe\n2 - РќР°РїРёСЃР°С‚СЊ СЃРѕРѕР±С‰РµРЅРёРµ\n0 - РќР°Р·Р°Рґ\n";
 					char b;
 					std::cin >> b;
 					std::cin.ignore(100, '\n');
 					switch (b) {
-					case '1':										//прочитать сообщения					
+					case '1':						//РїСЂРѕС‡РёС‚Р°С‚СЊ СЃРѕРѕР±С‰РµРЅРёСЏ					
 						if (messageList.empty()) {
-							std::cout << "У вас еще нет входящих сообщений!\n" << std::endl;
+							std::cout << "РЈ РІР°СЃ РµС‰Рµ РЅРµС‚ РІС…РѕРґСЏС‰РёС… СЃРѕРѕР±С‰РµРЅРёР№!\n" << std::endl;
 						}
 						else {
-							std::cout << "\n------Введите действиe:------\n1 - Личные\n2 - Общие\n0 - Назад\n";
+							std::cout << "\n------Р’РІРµРґРёС‚Рµ РґРµР№СЃС‚РІРёe:------\n1 - Р›РёС‡РЅС‹Рµ\n2 - РћР±С‰РёРµ\n0 - РќР°Р·Р°Рґ\n";
 							char d;
 							std::cin >> d;
 							std::cin.ignore(100, '\n');
 
 							switch (d) {
 							case '1':
-								setPrivateShowChat();   //вызываем метод вывода личных сообщений  
+								setPrivateShowChat();   	//РІС‹Р·С‹РІР°РµРј РјРµС‚РѕРґ РІС‹РІРѕРґР° Р»РёС‡РЅС‹С… СЃРѕРѕР±С‰РµРЅРёР№  
 								continue;
 							case '2':
-								setAllShowChat();		 //вызываем метод вывода общих сообщений
+								setAllShowChat();		//РІС‹Р·С‹РІР°РµРј РјРµС‚РѕРґ РІС‹РІРѕРґР° РѕР±С‰РёС… СЃРѕРѕР±С‰РµРЅРёР№
 							case '0':
 								continue;
 							default:
-								std::cout << "Неверный ВВОД!\n" << std::endl;
+								std::cout << "РќРµРІРµСЂРЅС‹Р№ Р’Р’РћР”!\n" << std::endl;
 								break;
 							}
 						}
 						break;
-					case '2':										//написать сообщение
+					case '2':						//РЅР°РїРёСЃР°С‚СЊ СЃРѕРѕР±С‰РµРЅРёРµ
 						setAddMessage();
 						break;
-					case '0':										//назад
+					case '0':						//РЅР°Р·Р°Рґ
 						currrenNull();
 						f1 = false;
 						break;
 					default:
-						std::cout << "Неверный ВВОД!\n" << std::endl;
+						std::cout << "РќРµРІРµСЂРЅС‹Р№ Р’Р’РћР”!\n" << std::endl;
 						break;
 					}
 				}
 			}
-			else { std::cout << "\nНеверный логин или пароль!!!\n"; }
+			else { std::cout << "\nРќРµРІРµСЂРЅС‹Р№ Р»РѕРіРёРЅ РёР»Рё РїР°СЂРѕР»СЊ!!!\n"; }
 			break;
-		case '2':									// регистрация нового пользователя
+		case '2':							// СЂРµРіРёСЃС‚СЂР°С†РёСЏ РЅРѕРІРѕРіРѕ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ
 			try {
-				NewUser();					//вызываем метод добавления нового пользователя			
+				NewUser();					//РІС‹Р·С‹РІР°РµРј РјРµС‚РѕРґ РґРѕР±Р°РІР»РµРЅРёСЏ РЅРѕРІРѕРіРѕ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ			
 				currrenNull();
 			}
 			catch (std::exception& e) {
@@ -97,14 +97,14 @@ void Methods::Menu() {
 			f = false;
 			break;
 		default:
-			std::cout << "Неверный ВВОД!\n" << std::endl;
+			std::cout << "РќРµРІРµСЂРЅС‹Р№ Р’Р’РћР”!\n" << std::endl;
 			break;
 		}
 	}
 }
 
 
-bool Methods::FindName(const std::string& name) {								 //метод проверки имени
+bool Methods::FindName(const std::string& name) {							//РјРµС‚РѕРґ РїСЂРѕРІРµСЂРєРё РёРјРµРЅРё
 	for (std::vector<User>::iterator it = UserSpisok.begin(); it != UserSpisok.end(); ++it) {
 		if (it->getName() == name)
 			return true;
@@ -112,7 +112,7 @@ bool Methods::FindName(const std::string& name) {								 //метод проверки имени
 	return false;
 }
 
-bool Methods::FindLogin(const std::string& login) {								//метод проверки логина
+bool Methods::FindLogin(const std::string& login) {							//РјРµС‚РѕРґ РїСЂРѕРІРµСЂРєРё Р»РѕРіРёРЅР°
 	for (std::vector<User>::iterator it = UserSpisok.begin(); it != UserSpisok.end(); ++it) {
 		if (it->getLogin() == login)
 			return true;
@@ -120,59 +120,59 @@ bool Methods::FindLogin(const std::string& login) {								//метод проверки логи
 	return false;
 }
 
-void Methods::NewUser() {					//метод создания нового пользователя
+void Methods::NewUser() {										//РјРµС‚РѕРґ СЃРѕР·РґР°РЅРёСЏ РЅРѕРІРѕРіРѕ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ
 	std::string name, login, password;
-	std::cout << "---- Введите данные для регистрации ----\n";
-	std::cout << "Имя: ";
+	std::cout << "---- Р’РІРµРґРёС‚Рµ РґР°РЅРЅС‹Рµ РґР»СЏ СЂРµРіРёСЃС‚СЂР°С†РёРё ----\n";
+	std::cout << "РРјСЏ: ";
 	bool n = true;
 	while (n) {
 		std::cin >> name;
-		if (name == "all") {			// исключение
+		if (name == "all") {			// РёСЃРєР»СЋС‡РµРЅРёРµ
 			throw NameExp();
 		}
 		if (FindName(name)) {
-			std::cout << "Данное имя уже занято выберите другое!\n\n";
-			std::cout << "------- Введите -------\nИмя: ";
+			std::cout << "Р”Р°РЅРЅРѕРµ РёРјСЏ СѓР¶Рµ Р·Р°РЅСЏС‚Рѕ РІС‹Р±РµСЂРёС‚Рµ РґСЂСѓРіРѕРµ!\n\n";
+			std::cout << "------- Р’РІРµРґРёС‚Рµ -------\nРРјСЏ: ";
 		}
 		else {
 			n = false;
 		}
 	}
 
-	std::cout << "Логин: ";
+	std::cout << "Р›РѕРіРёРЅ: ";
 	bool l = true;
 	while (l) {
 		std::cin >> login;
-		if (login == "all") {       // исключение
+		if (login == "all") {       // РёСЃРєР»СЋС‡РµРЅРёРµ
 			throw LoginExp();
 		}
 
 		if (FindLogin(login)) {
-			std::cout << "Данный логин уже занят выберите другой!\n\n";
-			std::cout << "------- Введите -------\nЛогин: ";
+			std::cout << "Р”Р°РЅРЅС‹Р№ Р»РѕРіРёРЅ СѓР¶Рµ Р·Р°РЅСЏС‚ РІС‹Р±РµСЂРёС‚Рµ РґСЂСѓРіРѕР№!\n\n";
+			std::cout << "------- Р’РІРµРґРёС‚Рµ -------\nР›РѕРіРёРЅ: ";
 		}
 		else {
 			l = false;
 		}
 	}
-	std::cout << "Пароль: ";
+	std::cout << "РџР°СЂРѕР»СЊ: ";
 	std::cin >> password;
-	User user(name, login, password);				//создаем объект класа User
-	UserSpisok.push_back(user);						// добавляем пользователя в массив
-	currentUser = std::make_shared<User>(user);		//создаем указатель на текущего пользователя
-	std::cout << "Пользователь зарегистрирован!\n\n";
+	User user(name, login, password);			//СЃРѕР·РґР°РµРј РѕР±СЉРµРєС‚ РєР»Р°СЃР° User
+	UserSpisok.push_back(user);				// РґРѕР±Р°РІР»СЏРµРј РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ РІ РјР°СЃСЃРёРІ
+	currentUser = std::make_shared<User>(user);		//СЃРѕР·РґР°РµРј СѓРєР°Р·Р°С‚РµР»СЊ РЅР° С‚РµРєСѓС‰РµРіРѕ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ
+	std::cout << "РџРѕР»СЊР·РѕРІР°С‚РµР»СЊ Р·Р°СЂРµРіРёСЃС‚СЂРёСЂРѕРІР°РЅ!\n\n";
 }
 
 
-bool Methods::UserSearch(const std::string& login, const std::string& password) {	//метод поиска пользователя по логину и паролю	
+bool Methods::UserSearch(const std::string& login, const std::string& password) {	//РјРµС‚РѕРґ РїРѕРёСЃРєР° РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ РїРѕ Р»РѕРіРёРЅСѓ Рё РїР°СЂРѕР»СЋ	
 	int i = 0;
 	while (i < UserSpisok.size()) {
 		std::string l = UserSpisok[i].getLogin();
 		std::string p = UserSpisok[i].getPassword();
 		if (login == l && password == p) {
-			currentUser = getUserByLogin(login);   //указатель на текущего пользователя
+			currentUser = getUserByLogin(login);   //СѓРєР°Р·Р°С‚РµР»СЊ РЅР° С‚РµРєСѓС‰РµРіРѕ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ
 			//userLogin = i;
-			std::cout << std::endl << "--------------------------Пользователь: " << currentUser->getName() << " ----------------------\n";
+			std::cout << std::endl << "--------------------------РџРѕР»СЊР·РѕРІР°С‚РµР»СЊ: " << currentUser->getName() << " ----------------------\n";
 			return true;
 		}
 		else { ++i; }
@@ -180,13 +180,13 @@ bool Methods::UserSearch(const std::string& login, const std::string& password) 
 	return false;
 }
 
-void Methods::PrintNamesUsers() {				    //метод получения списка зарегестрированных пользователей
+void Methods::PrintNamesUsers() {				    //РјРµС‚РѕРґ РїРѕР»СѓС‡РµРЅРёСЏ СЃРїРёСЃРєР° Р·Р°СЂРµРіРµСЃС‚СЂРёСЂРѕРІР°РЅРЅС‹С… РїРѕР»СЊР·РѕРІР°С‚РµР»РµР№
 	for (std::vector<User>::iterator it = UserSpisok.begin(); it != UserSpisok.end(); ++it) {
 		std::cout << it->getName() << std::endl;
 	}
 }
 
-int Methods::FindUserinUserSpisok(const std::string& name) {	//метод проверяет корректно ли введено имя
+int Methods::FindUserinUserSpisok(const std::string& name) {	    //РјРµС‚РѕРґ РїСЂРѕРІРµСЂСЏРµС‚ РєРѕСЂСЂРµРєС‚РЅРѕ Р»Рё РІРІРµРґРµРЅРѕ РёРјСЏ
 	for (std::vector<User>::iterator it = UserSpisok.begin(); it != UserSpisok.end(); ++it) {
 		if (it->getName() == name)
 			return 0;
@@ -194,63 +194,63 @@ int Methods::FindUserinUserSpisok(const std::string& name) {	//метод проверяет к
 	return -1;
 }
 
-void Methods::setPrivateShowChat() const {				//метод чтения личных сообщений
+void Methods::setPrivateShowChat() const {			    //РјРµС‚РѕРґ С‡С‚РµРЅРёСЏ Р»РёС‡РЅС‹С… СЃРѕРѕР±С‰РµРЅРёР№
 	std::string from;
 	std::string to;
 	std::cout << currentUser->getName() << std::endl;
-	std::cout << "--------------ЧАТ--------------\n";
+	std::cout << "--------------Р§РђРў--------------\n";
 	for (auto& message : messageList) {
-		if (currentUser->getName() == message.getFromMessage() || currentUser->getName() == message.getToMessage()) {//если текущий пользователь
-			from = (currentUser->getName() == message.getFromMessage()) ? "Меня" : message.getFromMessage();
+		if (currentUser->getName() == message.getFromMessage() || currentUser->getName() == message.getToMessage()) {//РµСЃР»Рё С‚РµРєСѓС‰РёР№ РїРѕР»СЊР·РѕРІР°С‚РµР»СЊ
+			from = (currentUser->getName() == message.getFromMessage()) ? "РњРµРЅСЏ" : message.getFromMessage();
 
-			to = (currentUser->getName() == message.getToMessage()) ? "Мне" : message.getToMessage();
-			//если текущее имя равно to, то отправляем сообщение самому себе, если нет, то получаем имя пользователя и присваиваем его значение полю to
+			to = (currentUser->getName() == message.getToMessage()) ? "РњРЅРµ" : message.getToMessage();
+			//РµСЃР»Рё С‚РµРєСѓС‰РµРµ РёРјСЏ СЂР°РІРЅРѕ to, С‚Рѕ РѕС‚РїСЂР°РІР»СЏРµРј СЃРѕРѕР±С‰РµРЅРёРµ СЃР°РјРѕРјСѓ СЃРµР±Рµ, РµСЃР»Рё РЅРµС‚, С‚Рѕ РїРѕР»СѓС‡Р°РµРј РёРјСЏ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ Рё РїСЂРёСЃРІР°РёРІР°РµРј РµРіРѕ Р·РЅР°С‡РµРЅРёРµ РїРѕР»СЋ to
 
 			if (message.getToMessage() != "all")
-				std::cout << "от " << from << " кому " << to << ": " << message.getText() << std::endl;
+				std::cout << "РѕС‚ " << from << " РєРѕРјСѓ " << to << ": " << message.getText() << std::endl;
 		}
 	}
 	std::cout << "-------------------------------" << std::endl;
 }
 
-void Methods::setAllShowChat() const {							// метод чтения общих сообщений
+void Methods::setAllShowChat() const {							// РјРµС‚РѕРґ С‡С‚РµРЅРёСЏ РѕР±С‰РёС… СЃРѕРѕР±С‰РµРЅРёР№
 	std::string from;
 	std::string to;
-	std::cout << "-----------ОБЩИЙ ЧАТ-----------\n";
+	std::cout << "-----------РћР‘Р©РР™ Р§РђРў-----------\n";
 	for (auto& message : messageList) {
-		if (currentUser->getName() == message.getFromMessage() || currentUser->getName() == message.getToMessage() || message.getToMessage() == "all") {//если текущий пользователь
-			from = (currentUser->getName() == message.getFromMessage()) ? "Меня" : message.getFromMessage();
-			if (message.getToMessage() == "all") 						//сообщение всем пользователям
-				std::cout << "от " << from << ": " << message.getText() << std::endl;
+		if (currentUser->getName() == message.getFromMessage() || currentUser->getName() == message.getToMessage() || message.getToMessage() == "all") {//РµСЃР»Рё С‚РµРєСѓС‰РёР№ РїРѕР»СЊР·РѕРІР°С‚РµР»СЊ
+			from = (currentUser->getName() == message.getFromMessage()) ? "РњРµРЅСЏ" : message.getFromMessage();
+			if (message.getToMessage() == "all") 						//СЃРѕРѕР±С‰РµРЅРёРµ РІСЃРµРј РїРѕР»СЊР·РѕРІР°С‚РµР»СЏРј
+				std::cout << "РѕС‚ " << from << ": " << message.getText() << std::endl;
 		}
 	}
 	std::cout << "-------------------------------" << std::endl;
 }
 
-void Methods::setAddMessage() {						    	//метод добавления сообщения в массив
+void Methods::setAddMessage() {						    	//РјРµС‚РѕРґ РґРѕР±Р°РІР»РµРЅРёСЏ СЃРѕРѕР±С‰РµРЅРёСЏ РІ РјР°СЃСЃРёРІ
 	std::string inputName;
 	std::string message;
-	std::cout << "\nВведите имя кому отправить сообщение:\n";
-	PrintNamesUsers();									  //выводим список пользователей
-	std::cout << "all - отправить всем\n";
+	std::cout << "\nР’РІРµРґРёС‚Рµ РёРјСЏ РєРѕРјСѓ РѕС‚РїСЂР°РІРёС‚СЊ СЃРѕРѕР±С‰РµРЅРёРµ:\n";
+	PrintNamesUsers();							//РІС‹РІРѕРґРёРј СЃРїРёСЃРѕРє РїРѕР»СЊР·РѕРІР°С‚РµР»РµР№
+	std::cout << "all - РѕС‚РїСЂР°РІРёС‚СЊ РІСЃРµРј\n";
 
 	std::cin >> inputName;
-	if (inputName == "all") {							  //отправка всем пользователям
-		std::cout << "\nВведите текст сообщения: \n";
+	if (inputName == "all") {						//РѕС‚РїСЂР°РІРєР° РІСЃРµРј РїРѕР»СЊР·РѕРІР°С‚РµР»СЏРј
+		std::cout << "\nР’РІРµРґРёС‚Рµ С‚РµРєСЃС‚ СЃРѕРѕР±С‰РµРЅРёСЏ: \n";
 
 		getline(std::cin, message, '\n');
 		getline(std::cin, message, '\n');
 		messageList.push_back(Message(currentUser->getName(), "all", message));
-		std::cout << "Сообщение разослано всем пользователям!\n";
+		std::cout << "РЎРѕРѕР±С‰РµРЅРёРµ СЂР°Р·РѕСЃР»Р°РЅРѕ РІСЃРµРј РїРѕР»СЊР·РѕРІР°С‚РµР»СЏРј!\n";
 	}
-	else {													//отправка личных сообщений
+	else {									//РѕС‚РїСЂР°РІРєР° Р»РёС‡РЅС‹С… СЃРѕРѕР±С‰РµРЅРёР№
 		int t = -1;
 		t = FindUserinUserSpisok(inputName);
 		if (t == -1) {
-			std::cout << "Пользователь с данным именем не найден\n";
+			std::cout << "РџРѕР»СЊР·РѕРІР°С‚РµР»СЊ СЃ РґР°РЅРЅС‹Рј РёРјРµРЅРµРј РЅРµ РЅР°Р№РґРµРЅ\n";
 		}
 		else {
-			std::cout << "Введите текст сообщения: \n";
+			std::cout << "Р’РІРµРґРёС‚Рµ С‚РµРєСЃС‚ СЃРѕРѕР±С‰РµРЅРёСЏ: \n";
 			getline(std::cin, message, '\n');
 			getline(std::cin, message, '\n');
 			messageList.push_back(Message(currentUser->getName(), inputName, message));
